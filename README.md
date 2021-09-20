@@ -1,4 +1,6 @@
 # Simplest TypeQL Units Model
+author: @modeller
+date: September 2021
 
 ## Overview
 This repo is the simplest TypeQL model of a units library. It contains the code and data needed to load a minimum example. It imports data froma series of csv, making it easy to add your own units.
