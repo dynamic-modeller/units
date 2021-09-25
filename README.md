@@ -5,7 +5,7 @@ date: September 2021
 ## Overview
 This repo is the simplest TypeQL model of a units library. It contains the code and data needed to load a minimum example. It imports data froma series of csv, making it easy to add your own units.
 
-## How it works
+## How it's used
 Units are defined by their string value, for example "kN.m", or "m2". This "unit" attribute, is also owned as a key by the ```unit_details``` relation, which contains all of the details for that particular unit. These details include conversion attributes, to enable conversion to the metric base unit. 
 
 To create a measure, one needs to simply have a quantity and connect the unit to it in the schema
@@ -13,6 +13,13 @@ To create a measure, one needs to simply have a quantity and connect the unit to
 
 Then, on import one just uses the simple syntax
 ```insert $m isa measure; $m 103.25; $m has unit "kPa";```
+
+## How its built
+Units are of different types:
+- core units are the ones all others break down to used in dimensional analysis, but also including non-SI dimensions like radians, composition, currency, bits, threads etc.
+- derived units are those created out of the core ones through combination of core units, without any scaling, and represent the base means of describing that quantity kind
+- scaled units are ones created out of core or derived through scaling, and they link back to their base for conversion purposes (implemented as a rule)
+- imperial units are just a form of scaling
 
 The unit is also connected to the dimensions, which define that measure. These dimensions also have the base unit name, attached to them. In addition to the usual SI dimensions (time, length, mass, current, temperature, moles, luminosity), there are two extra ones added for non-dimensional measures (radians, composition). The non-dimensional composition measures also connect to the unit they are compared on, for example m3/m3 has acomposition dimension of 1, and a length dimension of 3.
 
