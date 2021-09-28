@@ -1,5 +1,6 @@
 # Simplest TypeQL Units Model
-author: @modeller
+authors: @modeller and @bradeneliason
+
 date: September 2021
 
 ## Overview
