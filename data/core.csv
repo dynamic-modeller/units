@@ -1,7 +1,7 @@
 unit,uname,utype,ctype,c_first,c_second,isBase,latex_string,description,dim-t,dim-l,dim-m,dim-i,dim-k,dim-n,dim-j,dim-r,dim-c
 m,metre,si,simple,1,0,TRUE,$m$',length,0,1,0,0,0,0,0,0,0
 kg,kilogram,si,simple,1,0,TRUE,$kg$',mass,0,0,1,0,0,0,0,0,0
-s,second,si,simple,1,0,TRUE,$s$',time,1,0,1,0,0,0,0,0,0
+s,second,si,simple,1,0,TRUE,$s$',time,1,0,0,0,0,0,0,0,0
 A,ampere,si,simple,1,0,TRUE,$A$',electric current,0,0,0,1,0,0,0,0,0
 k,kelvin,si,simple,1,0,TRUE,$kg$',thermodynamic temperature,0,0,0,0,1,0,0,0,0
 mol,mole,si,simple,1,0,TRUE,$mol$',amount of substance,0,0,0,0,0,1,0,0,0
