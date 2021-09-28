@@ -26,6 +26,19 @@ The unit is also connected to the dimensions, which define that measure. These d
 
 Non-base units, like "in2", are automatically connected to their base unit, "m2", so that conversions can be set up. At the moment, conversions are not implemented, as we are waiting for calculations before implementing them.
 
+## Tolerances
+
+For this schema all tolerance types are converted into bilateral form with an upper and a lower tolernace value. How the upper and lower tolerance values are interpreted depends on two boolean values `is_absolute` and `is_offset`:
+ - If `is_absolute` is true the upper and lower tolerance value have the same units as the nominal value, otherwise the upper and lower tolerances are interpreted as a scaling factor of the nominal value. 
+ - If `is_offset` is true, the limits of the tolernace is computed by adding the upper and lower tolernace to the nominal value, otherwise, the upper and lower tolerance stand alone as the limits. 
+
+The table below shows how the tolerance `10±1` can be represented in four ways. 
+
+|                         | **is_absolute<br>true** | **is_absolute<br>false** |
+|-------------------------|:-----------------------:|:------------------------:|
+| **is_offset<br>true**   | +1 <br> -1              | (×) +0.1 <br> -0.1       |
+| **is_offset<br>false**  | 11 <br> 9               | (×) 1.10 <br> 0.90       |
+
 ## Installing the Repo
 
 ### Prerequisites
