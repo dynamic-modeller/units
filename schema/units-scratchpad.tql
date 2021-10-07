@@ -21,7 +21,7 @@ match
     $m isa measure; $m 107.69; $m has unit $u; $u "cm2";
     $conv (source: $u) isa convert,
         has quantity $quant,
-        has unit $base; get $quant, $base;
+        has unit $core; get $quant, $core;
 
 #------------------------------------------
 # 1.B: Composite Attributes Usage
@@ -82,7 +82,7 @@ define
     uname sub attribute, value string; # common name of unit
     latex_string sub attribute, value string; # latex string of unit
     description sub attribute, value string; # description of unit
-    isBase sub attribute, value boolean; #boolean of is unit a base?
+    isCore sub attribute, value boolean; #boolean of is unit a core?
     ctype sub attribute, value string, # enum of unit conversion type
             regex "^(simple|log|affine|time|nondim)$";
     utype sub attribute, value string, # enum of unit type
@@ -100,12 +100,12 @@ define
             owns ctype, # enum of conversion type
             owns c_first, # mostly a ratio
             owns c_second, # offset, log base, max value or null
-            owns isBase, # can be compound base
+            owns isCore, # can be compound core
             owns latex_string,
             owns description,
             relates dimensions,
-            relates base, 
-            plays unit_details:base;
+            relates core, 
+            plays unit_details:core;
     
 # then for dimensions, store the exponent of the dimension vector
 # and carry the unit string as a key
@@ -152,7 +152,7 @@ define
             owns tolerance,
             plays convert:source;
 
-    # the convert value to base SI unit relation
+    # the convert value to core SI unit relation
     convert sub relation,
             owns quantity,
             owns unit,
@@ -171,7 +171,7 @@ define
         when {
             $m isa measure, has units $u;
             $convert (source: $m) isa convert;
-            $dim (source: $u, base: $b) isa dimension;
+            $dim (source: $u, core: $c) isa dimension;
         } then {
             $convert (source: $m) isa convert, 
                 has unit $b;
@@ -181,7 +181,7 @@ define
     rule convert-measure-3:
         when {
             $m isa measure, has units $u;
-            $dim (source: $u, base: $b) isa dimension;
+            $dim (source: $u, core: $b) isa dimension;
             $convert (source: $m) isa convert, has unit $b;
             $u has ctype "simple";
             $u has c_first $cf;
