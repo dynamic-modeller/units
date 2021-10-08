@@ -20,9 +20,9 @@ class TypeQL_Data_Slice:
                 statement += '; $' + dim + ' has unit "' + self.units[i] + '";'
                 dims.append(dim)
 
-        if self.data["isBase"] == "FALSE":
-            # match in the base role
-            statement += '$base isa unit_details, has unit "'+ self.data["base"] + '";'
+        if self.data["isCore"] == "FALSE":
+            # match in the core role
+            statement += '$core isa unit_details, has unit "'+ self.data["core"] + '";'
 
         statement += 'insert $unit_details ('
         for dim in dims:
@@ -31,9 +31,9 @@ class TypeQL_Data_Slice:
         size = len(statement)
         statement = statement[:size - 2]
 
-        if self.data["isBase"] == "FALSE":
-            # add in the base role
-            statement += ', base: $base '
+        if self.data["isCore"] == "FALSE":
+            # add in the core role
+            statement += ', core: $core '
 
         statement += ') isa unit_details, has unit "' + self.data["unit"] + '",'
         statement += 'has uname "' + self.data["uname"] + '",'
@@ -41,7 +41,7 @@ class TypeQL_Data_Slice:
         statement += 'has ctype "' + self.data["ctype"] + '",'
         statement += 'has c_first ' + self.data["c_first"] + ','
         statement += 'has c_second ' + self.data["c_second"] + ','
-        statement += 'has isBase ' + self.data["isBase"].lower() + ','
+        statement += 'has isCore ' + self.data["isCore"].lower() + ','
         statement += 'has latex_string "' + self.data["latex_string"] + '",'
         statement += 'has description "' + self.data["description"] + '";'   
         logger.debug(f'inserted the unit -> {self.data["unit"]}')                    
@@ -50,7 +50,7 @@ class TypeQL_Data_Slice:
     def derived(self):
         return self.core()
 
-    def not_base(self):
+    def not_core(self):
         return self.core()
 
     def scaled(self):
@@ -194,7 +194,7 @@ if __name__ == '__main__':
     }
     path_to_csv = './data/'
     initial = ["dimension"]
-    primary = ['core','derived','not_base']
+    primary = ['base','core','not_core']
     secondary = ['scaled', 'imperial', 'examples']    
     
     # load all of the files in the director

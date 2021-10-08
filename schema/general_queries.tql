@@ -12,23 +12,23 @@ match
             has ctype $ctype,
             has c_first $c_first, 
             has c_second $c_second,
-            has isBase $isBase,
+            has isCore $isCore,
             has latex_string $latex_string,
             has description $description;
     
-# find the unit mm, connected to the base unit m
+# find the unit mm, connected to the core unit m
 match
     $unit isa unit; $unit "mm";
-    $base (dimensions:$dimb) isa unit_details,
+    $core (dimensions:$dimb) isa unit_details,
             has unit $unitb,
             has uname $unameb;
-    $unit_details(dimensions:$dim, base:$base) isa unit_details,
+    $unit_details(dimensions:$dim, core:$core) isa unit_details,
             has unit $unit,
             has uname $uname,
             has utype $utype,
             has ctype $ctype,
             has c_first $c_first, 
             has c_second $c_second,
-            has isBase $isBase,
+            has isCore $isCore,
             has latex_string $latex_string,
             has description $description;
